@@ -1,50 +1,112 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# 배공맵 Constitution
+
+상태: 사용자 검토용 초안 — 정식 제정 전
+
+이 문서는 명세·설계·구현·검증·변경 기록에 공통으로 적용할 프로젝트 원칙을 정의한다.
+구체적인 제품 기능은 PRD와 기능 명세에서, 구현 방법은 승인된 설계에서 정한다.
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. 동료로 협업하고 사용자가 최종 판단한다
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+> 프로젝트에서는 동료: 작업을 맡기되 리뷰와 검증은 내가 하기.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+AI는 작업을 수행하고 사용자는 명세·설계·코드를 리뷰하며 직접 검증하고 최종 판단한다.
+AI는 산출물, 변경 이유, 실행한 검사와 결과, 미검증 사항, 직접 확인할 방법을 제공한다.
+AI의 자체 검증을 사용자 검증이나 승인으로 표현하지 않는다.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### II. 명세를 개발과 검증의 기준으로 삼는다
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+노션 PRD를 제품 요구사항의 기준으로 사용한다.
+확정·제안·미정·검증 가정을 구분하며, AI는 제안이나 미정 사항을 임의로 확정하지 않는다.
+기능 명세는 사용자 동작, 적용 조건, 제약, 예외와 확인 가능한 완료 조건을 기술한다.
+요구사항·설계·작업·테스트의 연결을 유지하여 검증 결과가 어떤 요구사항을 다루는지 설명한다.
+요구사항 변경은 사용자 검토를 거쳐 명세에 먼저 반영하고 관련 설계·코드·테스트를 갱신한다.
+명세와 구현 또는 문서 간 충돌을 발견하면 알리고 확인하며, 구현에 맞춰 요구사항을 조용히 바꾸지 않는다.
+구현이 승인된 명세와 다르면 구현을 수정한다.
+명세 자체가 잘못됐거나 요구사항이 변경된 경우에는 사용자 승인 후 명세·설계·테스트를 함께 변경한다.
+테스트 실패를 없애기 위해 명세나 테스트의 기대 동작을 임의로 바꾸지 않는다.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### III. 단계별 승인과 승인된 범위 안에서 작업한다
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+명세 승인 후 설계를 작성하고, 설계·구현 계획 승인 후 제품 코드를 작성한다.
+작업은 사용자가 리뷰·검증할 수 있는 단위로 나누고 각 단계 결과를 승인받은 뒤 진행한다.
+AI는 사용자 침묵이나 테스트 통과를 다음 단계 승인으로 간주하지 않는다.
+요구사항·설계·작업 범위를 변경할 때는 이유와 영향을 설명하고 변경 승인을 받는다.
+사용자가 특정 단계를 명시적으로 승인하거나 검토 절차를 조정한 경우 해당 범위에만 적용한다.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### IV. 제품 동작은 TDD로 구현한다
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+제품 동작을 추가·변경하거나 버그를 수정할 때 Red → Green → Refactor 순서를 적용한다.
+하나의 동작이나 수용 조건을 TDD 작업·리뷰 단위로 사용자와 합의한다.
+테스트 하나마다 별도 승인을 요구하는 대신, 합의한 단위의 각 단계마다 결과를 제시하고 리뷰받는다.
+
+- Red: 승인된 요구사항의 기대 동작을 테스트로 작성하고 의도한 이유로 실패하는지 실행하여 확인한다.
+  문법 오류나 환경·설정 문제는 기대 동작에 대한 실패와 구분한다.
+- Green: 테스트를 통과시키는 최소 구현을 작성한다. 통과를 위해 기대 동작을 약화하지 않는다.
+- Refactor: 테스트 통과를 유지하며 중복과 구조를 개선하고 관련 테스트를 다시 실행한다.
+
+테스트와 실패 이유를 사용자에게 제시하여 검토받은 뒤 최소 구현으로 진행한다.
+최소 구현과 통과 결과를 검토받은 뒤 리팩터링하고 그 결과도 리뷰받는다.
+실패·미실행·미검증 항목을 완료로 표시하지 않는다.
+문서 작성처럼 실행 동작이 없는 작업에는 문서 검토를 적용한다.
+자동화 테스트만으로 확인하기 어려운 화면의 시각적 품질은 사용자 확인으로 보완한다.
+
+### V. 주요 결정을 이해하고 설명할 수 있게 한다
+
+새로운 기술이나 주요 설계를 제안할 때 목적, 선택 이유, 대안과 단점을 설명한다.
+권한, 데이터 구조, 상태 변경 등 중요한 결정에서 사용자가 확인할 핵심을 짚는다.
+사용자는 질문·수정 의견·승인으로 검토 결과를 전달한다.
+AI는 이해 확인을 시험이나 채점으로 운영하지 않으며 사용자 침묵을 이해·승인으로 간주하지 않는다.
+코드 리뷰 시 핵심 로직과 직접 실행할 검증 방법을 제공한다.
+설명은 변경 규모에 맞추고, 작은 기계적 수정에는 간결한 설명을 제공한다.
+
+### VI. 커밋과 푸시는 사용자 지시로 수행한다
+
+커밋 전에 포함 파일, 변경 목적, 검증 상태와 커밋 메시지를 제시한다.
+사용자의 명시적 지시 후 커밋하고, 푸시도 별도 지시 후 수행한다.
+커밋 메시지는 `type(scope): 한국어 변경 내용` 형식을 사용하며 scope는 선택 사항이다.
+커밋 하나에는 하나의 목적을 담는다. 타입 목록과 추가 코드 스타일 규칙은 별도 검토로 정한다.
+
+## 요구사항 기준과 변경 범위
+
+요구사항 원본은 노션의 「배공맵 PRD v0.1 — 검토용 초안」과 「미정 사항」이다.
+기능별 명세는 `specs/<기능>/spec.md`, 설계·구현 계획은 같은 폴더의 `plan.md`,
+작업 목록은 `tasks.md`로 관리한다. 노션과 로컬 문서는 자동 동기화되지 않는다.
+원본 변경이나 충돌을 확인하면 사용자에게 알리고 합의한 내용을 관련 문서에 반영한다.
+
+constitution은 모든 기능의 개발 원칙을 정하고 기능 명세는 해당 기능의 동작을 정한다.
+구체적인 라이브러리, 지도·로그인 공급자, 기능별 계산식·상태 규칙을 이 문서에서 확정하지 않는다.
+추가 도구·코드 규칙이 필요하면 목적과 영향을 제안하여 사용자 검토를 거친다.
+
+## 작업·리뷰·검증 절차
+
+1. PRD와 기존 코드를 읽고 요구사항과 미정 사항을 정리한다.
+2. 명세 초안을 작성하고 사용자가 내용·경계 조건·완료 조건을 검토하여 승인한다.
+3. 설계와 구현·검증 계획을 작성하고 선택 이유와 대안을 설명하여 승인받는다.
+4. 승인된 작업 단위에서 테스트 작성·실패 확인 → 사용자 검토를 진행한다.
+5. 최소 구현·테스트 통과 → 사용자 검토 → 리팩터링·재검증 → 사용자 리뷰를 진행한다.
+6. 명세의 완료 조건에 따른 결과를 제공하고 사용자가 직접 검증한다.
+7. 커밋 포함 내용과 메시지를 제시하고 사용자 지시 후 커밋·푸시한다.
+
+테스트가 요구사항을 충족한다는 근거와 사용자 검증 상태를 구분하여 보고한다.
+실행하지 못한 검사는 이유와 확인 방법을 함께 기록한다.
+이 초안 이전에 작성된 `specs/` 문서는 제정 후 원칙에 맞게 점검할 검토용 초안이다.
+constitution 작성·승인만으로 기존 명세·설계·구현을 승인한 것으로 간주하지 않는다.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+이 문서는 사용자 승인 후 프로젝트 원칙으로 제정한다.
+충돌이 생기면 충돌 내용과 영향을 설명하고 사용자에게 확인한다.
+사용자의 명시적 작업 지시는 해당 작업에서 우선하며, 지속적인 원칙 변경은 별도 개정으로 기록한다.
+절차의 예외는 대상 작업과 생략할 단계를 명시하고 사용자 승인을 받는다.
+예외 사유와 승인 범위를 해당 작업의 계획·리뷰 기록에 남기며,
+별도 문서가 없는 작은 작업은 대화에 기록한다. 예외는 다른 작업에 자동 적용하지 않는다.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+개정은 변경 이유·영향·초안을 제시하고 사용자 승인 후 반영한다.
+버전은 원칙의 삭제·재정의 등 호환되지 않는 변경은 MAJOR,
+새 원칙이나 실질적인 지침 확대는 MINOR, 의미를 바꾸지 않는 정정은 PATCH를 올린다.
+첫 정식 제정 버전은 1.0.0으로 제안하며 제정일은 실제 사용자 승인일로 기록한다.
+명세·설계·코드 리뷰 시 관련 원칙 준수와 승인 여부를 확인한다.
+
+**Version**: 1.0.0-draft | **Ratified**: TODO(RATIFICATION_DATE): 사용자 승인 후 YYYY-MM-DD로 기록 | **Last Amended**: 2026-10-06
