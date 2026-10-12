@@ -1,0 +1,8 @@
+.choice { display: inline-flex; align-items: center; gap: var(--bg-space-8); min-height: 32px; max-width: 100%; color: var(--bg-color-ink); font: 500 13px/20px var(--bg-font-family); cursor: pointer; overflow-wrap: anywhere; }
+.input { appearance: none; display: grid; place-content: center; box-sizing: border-box; width: 20px; height: 20px; flex: 0 0 20px; margin: 0; border: 1px solid var(--bg-color-line); border-radius: var(--bg-space-4); background: var(--bg-color-white); cursor: inherit; }
+.input[type="radio"] { border-radius: 50%; }
+.input:checked { background: var(--bg-color-selection); }
+.input:checked::after { content: "✓"; color: var(--bg-color-white); font: 700 13px/20px var(--bg-font-family); }
+.input[type="radio"]:checked::after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--bg-color-white); }
+.input:focus-visible { outline: 2px solid var(--bg-color-focus); outline-offset: 2px; }
+.choice:has(.input:disabled) { opacity: .55; color: var(--bg-color-on-disabled); cursor: not-allowed; }

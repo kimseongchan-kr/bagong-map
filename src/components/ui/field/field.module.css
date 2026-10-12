@@ -1,0 +1,9 @@
+.field { display: flex; flex-direction: column; gap: 6px; width: 300px; max-width: 100%; min-width: 0; color: var(--bg-color-ink); font-family: var(--bg-font-family); }
+.label { font-size: 13px; font-weight: 500; line-height: 20px; overflow-wrap: anywhere; }
+.control { box-sizing: border-box; width: 100%; min-width: 0; min-height: 44px; padding: 10px var(--bg-space-12); border: 1px solid var(--bg-color-line); border-radius: var(--bg-space-8); background: var(--bg-color-white); color: var(--bg-color-ink); font: 400 14px/21px var(--bg-font-family); }
+.control::placeholder { color: var(--bg-color-supporting-text); opacity: 1; }
+.control[aria-invalid="true"] { border-color: var(--bg-color-error); }
+.control:focus-visible { outline: 2px solid var(--bg-color-focus); outline-offset: 1px; }
+.control:disabled { background: var(--bg-color-surface); color: var(--bg-color-on-disabled); cursor: not-allowed; }
+.message { margin: 0; font-size: 11px; line-height: 17px; color: var(--bg-color-supporting-text); overflow-wrap: anywhere; }
+.error { color: var(--bg-color-error); }

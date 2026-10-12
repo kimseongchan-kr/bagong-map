@@ -10,13 +10,18 @@
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",
-    "lint": "eslint src tests vitest.config.ts"
+    "lint": "eslint src tests .storybook vitest.config.ts playwright.storybook.config.ts",
+    "storybook": "storybook dev -p 6006 --host 127.0.0.1 --no-open",
+    "build-storybook": "storybook build",
+    "test:storybook": "playwright test --config=playwright.storybook.config.ts"
   },
   "engines": {
     "node": ">=24 <25"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",
+    "@storybook/addon-docs": "10.6.1",
+    "@storybook/react-vite": "10.6.1",
     "@testing-library/react": "16.3.3",
     "@testing-library/user-event": "14.6.7",
     "@types/node": "26.6.4",
@@ -25,7 +30,9 @@
     "eslint": "9.39.5",
     "eslint-config-next": "16.4.0",
     "jsdom": "29.1.1",
+    "storybook": "10.6.1",
     "typescript": "5.9.3",
+    "vite": "8.3.4",
     "vitest": "5.0.3"
   },
   "dependencies": {

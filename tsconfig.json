@@ -29,6 +29,8 @@
     "tests/**/*.ts",
     "tests/**/*.tsx",
     "vitest.config.ts",
+    "playwright.storybook.config.ts",
+    ".storybook/**/*.ts",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],

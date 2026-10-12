@@ -1,0 +1,5 @@
+/* centered Canvas의 루트도 화면 폭 안에 두어 자식의 max-width가 작동하게 한다. */
+#storybook-root {
+  min-width: 0;
+  max-width: 100%;
+}
