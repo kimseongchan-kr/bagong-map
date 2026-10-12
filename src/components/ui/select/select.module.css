@@ -1,0 +1,5 @@
+.root { position: relative; }
+.trigger { display: flex; align-items: center; justify-content: space-between; gap: var(--bg-space-8); padding-block: 9px; text-align: left; cursor: pointer; overflow-wrap: anywhere; }
+.arrow { flex: 0 0 auto; font-size: 16px; line-height: 24px; }
+.list { box-sizing: border-box; margin: 0; padding: var(--bg-space-4); width: 100%; max-height: 248px; overflow-y: auto; border: 1px solid var(--bg-color-line); border-radius: var(--bg-space-8); background: var(--bg-color-white); }
+.empty { margin: 0; padding: 12px; color: var(--bg-color-supporting-text); font-size: 13px; line-height: 20px; }
