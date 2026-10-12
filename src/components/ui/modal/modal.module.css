@@ -1,0 +1,13 @@
+.modal { box-sizing: border-box; width: 680px; max-width: calc(100vw - 32px); height: 780px; max-height: calc(100dvh - 32px); margin: auto; padding: var(--bg-space-24) var(--bg-space-32); border: 0; border-radius: var(--bg-space-20); background: var(--bg-color-white); color: var(--bg-color-ink); font: 400 14px/21px var(--bg-font-family); overflow: hidden; }
+.modal[open] { display: flex; flex-direction: column; gap: var(--bg-space-16); }
+.modal::backdrop { background: rgb(32 45 41 / 40%); }
+:global(body):has(.modal[open]) { overflow: hidden; }
+.header { display: flex; align-items: center; justify-content: space-between; gap: var(--bg-space-8); flex-shrink: 0; min-height: 42px; }
+.title { margin: 0; font-size: 24px; line-height: 36px; overflow-wrap: anywhere; }
+.close { display: grid; place-content: center; flex: 0 0 40px; box-sizing: border-box; width: 40px; height: 40px; padding: 0; border: 1px solid var(--bg-color-line); border-radius: var(--bg-space-12); background: var(--bg-color-white); color: var(--bg-color-ink); font: 500 20px/24px var(--bg-font-family); cursor: pointer; }
+.close:hover { background: var(--bg-color-brand-soft); }
+.close:focus-visible { outline: 2px solid var(--bg-color-focus); outline-offset: 2px; }
+.description { margin: 0; flex-shrink: 0; color: var(--bg-color-supporting-text); font-size: 13px; line-height: 20px; overflow-wrap: anywhere; }
+.body { flex: 1 1 auto; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 3px; margin: -3px; overflow-wrap: anywhere; }
+.footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; flex-shrink: 0; gap: var(--bg-space-12); }
+@media (max-width: 480px) { .modal { padding: var(--bg-space-20) var(--bg-space-16); } .title { font-size: 20px; line-height: 30px; } }
