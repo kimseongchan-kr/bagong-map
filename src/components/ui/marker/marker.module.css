@@ -1,0 +1,9 @@
+.marker { box-sizing: border-box; display: inline-flex; align-items: center; gap: var(--bg-space-8); min-height: 46px; max-width: 100%; padding: 11px var(--bg-space-12); border: 1px solid var(--bg-color-line); border-radius: var(--bg-space-12); background: var(--bg-color-white); color: var(--bg-color-ink); font: 700 14px/21px var(--bg-font-family); cursor: pointer; overflow-wrap: anywhere; text-align: left; }
+.number { color: var(--bg-color-accent-text); font-size: 12px; line-height: 18px; flex-shrink: 0; }
+.marker[aria-pressed="true"] { background: var(--bg-color-selection); border-color: var(--bg-color-selection); color: var(--bg-color-white); }
+.marker[aria-pressed="true"] .number { color: inherit; }
+.marker[data-closed="true"] { background: var(--bg-color-surface); color: var(--bg-color-supporting-text); }
+.marker[data-closed="true"] .number { color: inherit; }
+.closed { font-size: 11px; font-weight: 500; line-height: 17px; }
+.marker:focus-visible { outline: 2px solid var(--bg-color-focus); outline-offset: 2px; }
+.marker:disabled { cursor: not-allowed; opacity: .55; }
