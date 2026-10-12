@@ -1,0 +1,17 @@
+.card { box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; width: 388px; max-width: 100%; min-height: 164px; padding: var(--bg-space-16); border: 1px solid var(--bg-color-line); border-radius: var(--bg-space-12); background: var(--bg-color-white); color: var(--bg-color-ink); font-family: var(--bg-font-family); text-align: left; overflow-wrap: anywhere; cursor: pointer; }
+.card[aria-pressed="true"] { background: var(--bg-color-brand-soft); border-color: var(--bg-color-brand); }
+.card[data-closed="true"] { background: var(--bg-color-surface); }
+.card:focus-visible { outline: 2px solid var(--bg-color-focus); outline-offset: 2px; }
+.card:disabled { cursor: not-allowed; opacity: .55; }
+.status, .footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--bg-space-8); width: 100%; }
+.status { min-height: 22px; font-size: 11px; font-weight: 500; line-height: 17px; }
+.mode { color: var(--bg-color-green); }
+.deadline, .number { color: var(--bg-color-accent-text); }
+.menu { display: flex; align-items: baseline; gap: var(--bg-space-8); min-height: 29px; font-weight: 700; }
+.number { font-size: 12px; line-height: 18px; flex-shrink: 0; }
+.title { font-size: 17px; line-height: 26px; }
+.description { color: var(--bg-color-supporting-text); font-size: 11px; line-height: 17px; }
+.footer { min-height: 24px; margin-top: auto; }
+.participants { color: var(--bg-color-supporting-text); font-size: 12px; font-weight: 500; line-height: 18px; }
+.price { font-size: 13px; font-weight: 700; line-height: 20px; }
+.card[data-closed="true"], .card[data-closed="true"] .mode, .card[data-closed="true"] .deadline, .card[data-closed="true"] .number { color: var(--bg-color-supporting-text); }
